@@ -14,7 +14,7 @@ class Week extends Component {
     }
     static getDerivedStateFromProps(props,state){
         if(props.date+""==="") return ({});
-        return ({date : props.date});           //date is always in number format
+        return ({date : props.date});          
     }
     shouldComponentUpdate(props){
         if(props.view !== "Week" || props.date+""==="") return false;
@@ -37,7 +37,7 @@ class Week extends Component {
                 }
                 day= day+"";
                 let date= "2021-06-" + (day.length === 1 ? "0" + day : day);
-                await Axios.get("http://localhost:3001/data", {
+                await Axios.get("https://schedule-calender.herokuapp.com/data", {
                     params: {name : str, date : date},
                 }).then(async (response) => {
                      let currday= response.data;
@@ -51,7 +51,7 @@ class Week extends Component {
             });
         }
         for(let i=weekStart; i<weekStart+7; i++){
-            let daydata= await weekInfo(name,i);
+            let daydata = await weekInfo(name,i);
             dbdata.push(daydata);
         }
         this.setState({data : dbdata});
@@ -59,12 +59,11 @@ class Week extends Component {
     render() {
         const curr= this.state;
         let i=0;
-        console.log(curr.show);
         return (
-            <div>
+            <div className="WeekParent">
                 {
-                    curr.weekDays.map((day,ind)=>(
-                    <div>
+                    curr.show.map((day,ind)=>(
+                    <div className="WeekDayParent">
                         <div key={ind} className="Wday">
                             {curr.weekDays[i++]}
                         </div>

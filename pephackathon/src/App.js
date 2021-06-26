@@ -37,7 +37,7 @@ class App extends Component {
         let dbdata = [];
         function getName(str) {
             return new Promise(async (resolve) => {
-                await Axios.get("http://localhost:3001/search", {
+                await Axios.get("https://schedule-calender.herokuapp.com/search", {
                     params: { name: str },
                 }).then(async (response) => {
                     for (let i = 0; i < response.data.length; i++) {
@@ -55,10 +55,10 @@ class App extends Component {
             return new Promise(async (resolve) => {
                 let profiledata = [];
                 profiledata.push(useName);
-                await Axios.get("http://localhost:3001/profile", {
+                await Axios.get("https://schedule-calender.herokuapp.com/profile", {
                     params: { name: useName },
                 }).then((res) => {
-                    const data = res.data; //JSON
+                    const data = res.data; 
                     for (let i = 0; i < data.length; i++) {
                         const date = data[i].date.substring(5, 10);
                         profiledata.push(date);
@@ -71,7 +71,6 @@ class App extends Component {
             });
         };
         let data = await getName(name);
-        console.log(data);
         this.setState({ show: data });
     }
     render() {

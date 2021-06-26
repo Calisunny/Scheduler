@@ -26,7 +26,7 @@ class Month extends Component {
                 day= day+"";
                 let date= "2021-06-" + (day.length === 1 ? "0" + day : day);
                 daydata.push(date);
-                await Axios.get("http://localhost:3001/data", {
+                await Axios.get("https://schedule-calender.herokuapp.com/data", {
                     params: {name : str, date : date},
                 }).then(async (response) => {
                      let currday= response.data;

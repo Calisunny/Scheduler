@@ -13,7 +13,7 @@ class Day extends Component {
     }
     static getDerivedStateFromProps(props,state){
         if(props.date+""==="") return ({});
-        return ({date : props.date+""});           //date is always in string format
+        return ({date : props.date+""});         
     }
     shouldComponentUpdate(props){
         if(props.view !== "Day" || props.date+""==="") return false;
@@ -30,11 +30,10 @@ class Day extends Component {
         let dbdata = [];
         function getName(str){
             return new Promise(async (resolve) => {
-                await Axios.get("http://localhost:3001/data", {
+                await Axios.get("https://schedule-calender.herokuapp.com/data", {
                     params: { name : str, date : date},
                 }).then(async (response) => {
                     let data= response.data;
-                    console.log(response);
                     for (let i = 0; i < data.length; i++) {
                         dbdata.push(data[i].starttime+"-"+data[i].endtime);
                         dbdata.push(data[i].task);
@@ -48,7 +47,6 @@ class Day extends Component {
     }
     render() {
         const curr= this.state;
-        console.log(curr.show,curr.date);
         return (
             <div className="dayResults">
                 <br />

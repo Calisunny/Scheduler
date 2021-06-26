@@ -21,7 +21,7 @@ class Form extends Component {
         }
         const getCount = () => {
             return new Promise(async (resolve) => {
-                await Axios.get("http://localhost:3001/check", {
+                await Axios.get("https://schedule-calender.herokuapp.com/check", {
                     params:{name: curr.name ,starttime : curr.start,endtime : curr.end},
                 }).then(async (response) => {
                     resolve(response.data);
@@ -33,12 +33,10 @@ class Form extends Component {
             window.alert("Schedule is clashing"); 
             return;
         }
-        console.log(curr.name,curr.date,curr.start,curr.end,curr.task);
-        Axios.post("http://localhost:3001/insert",
+        Axios.post("https://schedule-calender.herokuapp.com/insert",
             {params:{name: curr.name, date:curr.date, start: curr.start,
                 end: curr.end, task: curr.task}}
         ).then((response)=>{
-            console.log(response);
             window.location.reload();
         });
     };

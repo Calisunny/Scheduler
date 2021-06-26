@@ -8,10 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    user: "root",
-    host: "localhost",
-    password: "password",
-    database: "scheduler",
+    user: "u2fjo01yctnytsen",
+    host: "baa2yyqzyjtiq90fifsr-mysql.services.clever-cloud.com",
+    password: "ezKyOhnLDLUXau5estNG",
+    database: "baa2yyqzyjtiq90fifsr",
 });
 
 app.get("/search", (req, res) => {
@@ -53,19 +53,6 @@ app.get("/profile", (req, res) => {
         }
     );
 });
-// app.get("/day", (req, res) => {
-//     console.log("get request to day");
-//     db.query(
-//         `SELECT starttime,endtime,task FROM teachers WHERE name = ${req.query.name} AND date = ${req.query.date}`,
-//         (err, result) => {
-//             if (err) {q
-//                 console.log(err);
-//             } else {
-//                 res.send(result);
-//             }
-//         }
-//     );
-// });
 app.get("/end", (req, res) => {
     db.query("SELECT * FROM teachers", (err, result) => {
         if (err){

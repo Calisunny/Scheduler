@@ -14,7 +14,7 @@ class AddData extends Component {
         element.classList.remove("hiddenForm");
     }
     hide = () => {
-        var element = document.getElementById("F");
+        var element = document.getElementById("Form");
         element.classList.remove("visibleForm");
         element.classList.add("hiddenForm");
     }
