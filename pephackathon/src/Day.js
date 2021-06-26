@@ -7,57 +7,56 @@ class Day extends Component {
         super(props)
         this.state = {
             show: [],
-            str: "",
-            date: "21"
+            date: "1"
         }
+        this.getData = this.getData.bind(this);
     }
     static getDerivedStateFromProps(props,state){
-        return ({str : props.str});
+        if(props.date+""==="") return ({});
+        return ({date : props.date+""});           //date is always in string format
+    }
+    shouldComponentUpdate(props){
+        if(props.view !== "Day" || props.date+""==="") return false;
+        return true;
+    }
+    componentDidUpdate(props){
+        if(props.date+"" === this.state.date) return;
+        this.getData();
     }
     async getData() {
-        const name = this.state.str;
+        const name = this.props.str;
         let date= this.state.date;
         date= "2021-06-"+ (date.length === 1 ? "0" + date : date);
-        console.log(date);
         let dbdata = [];
-        function getName(str) {
+        function getName(str){
             return new Promise(async (resolve) => {
-                await Axios.get("http://localhost:3001/day", {
+                await Axios.get("http://localhost:3001/data", {
                     params: { name : str, date : date},
                 }).then(async (response) => {
                     let data= response.data;
+                    console.log(response);
                     for (let i = 0; i < data.length; i++) {
-                        dbdata.push(data[i]);
+                        dbdata.push(data[i].starttime+"-"+data[i].endtime);
+                        dbdata.push(data[i].task);
                     }
                     resolve(dbdata);
                 });
             });
         }
         let data = await getName(name);
-        this.setState({show : data});
+        this.setState({show : data, date : this.props.date+""});
     }
     render() {
-        const show= this.state.show;
-        const arr= [1];
+        const curr= this.state;
+        console.log(curr.show,curr.date);
         return (
-            <div>
+            <div className="dayResults">
+                <br />
+                <br />
                 {
-                    arr.map(()=>{
-                        for(let i=0;i<show.length;i=i+3){
-                          return(
-                          <div className="oneLine" key={i}>
-                            {
-                                show[i]             //start
-                            } - {
-                                show[i+1]           //end
-                            } <br/> {
-                                show[i+2]           //task
-                            }
-                          </div>
-                          )
-                        }
-                        return <React.Fragment/>
-                    })
+                    curr.show.map((val,ind)=>(
+                        <div key={ind}>{val}</div>
+                    ))
                 }
             </div>
         )

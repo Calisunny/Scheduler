@@ -15,6 +15,24 @@ class Form extends Component {
     }
     send = () => {
         let curr= this.state;
+        if((curr.start).parseInt >= (curr.end).parseInt){
+            window.alert("Invalid Start and End Time");
+            return;
+        }
+        const getCount = () => {
+            return new Promise(async (resolve) => {
+                await Axios.get("http://localhost:3001/check", {
+                    params:{name: curr.name ,starttime : curr.start,endtime : curr.end},
+                }).then(async (response) => {
+                    resolve(response.data);
+                });
+            })
+        }
+        let count = getCount();
+        if(count > 0){
+            window.alert("Schedule is clashing"); 
+            return;
+        }
         console.log(curr.name,curr.date,curr.start,curr.end,curr.task);
         Axios.post("http://localhost:3001/insert",
             {params:{name: curr.name, date:curr.date, start: curr.start,
@@ -28,7 +46,7 @@ class Form extends Component {
         var element = document.getElementById("Form");
         element.classList.remove("visibleForm");
         element.classList.add("hiddenForm");
-    };
+    }
     render() {
         return (
             <div id="Form" className="hiddenForm">
@@ -64,6 +82,7 @@ class Form extends Component {
                         className="w m0"
                         type="time"
                         placeholder="02:00"
+                        
                     />
                 </div>
                 <p className="m0">End Time</p>

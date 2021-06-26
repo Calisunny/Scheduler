@@ -10,7 +10,7 @@ html {
     align-content: center;
     text-align: center;
 }
-.teacherName h2 {
+.bigText h2 {
     text-transform: capitalize;
     margin-bottom: 1px;
     margin-top: 1px;
@@ -31,6 +31,7 @@ html {
     border-radius: 18px;
     background: #ffffff;
     box-shadow: 5px 5px 27px #666666, -5px -5px 27px #ffffff;
+    cursor: pointer;
 }
 .teacherContainer:hover {
     background: #000;
@@ -78,6 +79,13 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+}#Form input {
+    outline-width: 0;
+    border: none;
+    background-color: #eee;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 18px;
 }
 .createInside {
     display: flex;
@@ -86,18 +94,29 @@ html {
     height: 35px;
     background: #ffffff;
     box-shadow: 8px 8px 13px #666666, -8px -8px 13px #ffffff;
+    cursor: pointer;
 }
 .m0 {
     margin: 0%;
 }
 .w {
     width: 50px;
+}.formButtons {
+    margin-top: 10px;
 }
 @media only screen and (max-width: 900px) {
     .teacherContainer {
         width: 200px;
         max-width: 250px;
         min-width: 200px;
+    }
+}@media only screen and (max-height: 732px) {
+    #Form{
+        font-size: 15px;
+    }#Form input{
+        margin: 0;
+        padding: 5px;
+        padding-left: 10px;
     }
 }
 .visibleForm,

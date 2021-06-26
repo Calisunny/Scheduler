@@ -24,7 +24,7 @@ class App extends Component {
     enter = (e) => {
         this.setState({ enter: true, chosen: e.target.id });
     };
-    back = (e) => {
+    back = () => {
         window.location.reload();
     };
     makeVisible = (e) => {
@@ -80,8 +80,6 @@ class App extends Component {
         for (let i = 0; i < curr.show.length; i++)
             names.push(curr.show[i].shift());
         let k = 0;
-        let arr = [1];
-        console.log(names);
         if (curr.enter) {
             return (
                 <div>
@@ -96,7 +94,7 @@ class App extends Component {
         }
         return (
             <div>
-                <Topbar textChange={this.textChange} enter={curr.enter} />
+                <Topbar textChange={this.textChange} enter={curr.enter}/>
                 <div className="teacherParent">
                     {curr.show.map((data, index) => (
                         <div
@@ -104,14 +102,14 @@ class App extends Component {
                             key={index}
                             onClick={(e) => this.enter(e)}
                         >
-                            <div className="teacherName" key={index}>
+                            <div className="bigText" key={index}>
                                 <h2 id={names[k]}>{names[k++]}</h2>
                             </div>
                             {
                                 data.map((val,index)=>(
-                                <div className="teacherData" key={index}>
-                                {val}
-                                <br />
+                                <div className="data" key={index} id={names[k-1]}>
+                                    {val}
+                                    <br />
                                 </div>
                                 ))
                             }

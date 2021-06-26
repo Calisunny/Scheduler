@@ -2,16 +2,16 @@ const express = require("express");
 const app = express();
 const mysql = require("mysql");
 const cors = require("cors");
-const PORT = 3306;
+const PORT = 3001;
 
 app.use(cors());
 app.use(express.json());
 
 const db = mysql.createConnection({
-    user: "u2fjo01yctnytsen",
-    host: "baa2yyqzyjtiq90fifsr-mysql.services.clever-cloud.com",
-    password: "ezKyOhnLDLUXau5estNG",
-    database: "baa2yyqzyjtiq90fifsr",
+    user: "root",
+    host: "localhost",
+    password: "password",
+    database: "scheduler",
 });
 
 app.get("/search", (req, res) => {
@@ -26,7 +26,7 @@ app.get("/search", (req, res) => {
         }
     );
 });
-app.get("/day", (req, res) => {
+app.get("/data", (req, res) => {
     db.query(
         `SELECT starttime, endtime, task FROM teachers WHERE name
         = '${req.query.name.toLowerCase()}' AND date LIKE '${req.query.date}%'`,
@@ -53,7 +53,19 @@ app.get("/profile", (req, res) => {
         }
     );
 });
-
+// app.get("/day", (req, res) => {
+//     console.log("get request to day");
+//     db.query(
+//         `SELECT starttime,endtime,task FROM teachers WHERE name = ${req.query.name} AND date = ${req.query.date}`,
+//         (err, result) => {
+//             if (err) {q
+//                 console.log(err);
+//             } else {
+//                 res.send(result);
+//             }
+//         }
+//     );
+// });
 app.get("/end", (req, res) => {
     db.query("SELECT * FROM teachers", (err, result) => {
         if (err){
@@ -83,6 +95,24 @@ app.post("/insert", (req, res) => {
         }
     );
 });
-app.listen( process.env.PORT || PORT, () => {
+app.get("/check", (req, res) => {
+    console.log(req.query.starttime);
+    console.log(req.query.endtime);
+    console.log(req.query.name);
+
+    db.query(
+        `SELECT COUNT(*) FROM teachers WHERE endtime > ${req.query.starttime} AND starttime < ${req.query.endtime}AND name = ${req.query.name}`,
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send(result);
+            }
+        }
+    );
+});
+app.listen(process.env.PORT || PORT, () => {
     console.log("Your server is running on port 3001");
 });
+// CLEVER_TOKEN=c96ff22614534a5aa72fc167235c2120
+// CLEVER_SECRET=50f1f536b1eb48a79e98e205cf5a49d5
