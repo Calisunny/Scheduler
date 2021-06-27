@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import "./DisplayTeacher.css";
-import Axios from "axios";
+import "./DisplayTeacher.css"
 
 class AddData extends Component {
     constructor(props) {
@@ -28,10 +27,10 @@ class AddData extends Component {
             window.alert("Invalid Start and End Time");
             return;
         }
-        const getCount = () => {
+        function getCount(){
             return new Promise(async (resolve) => {
                 await Axios.get("https://schedule-calender.herokuapp.com/check", {
-                    params:{name: props.name ,starttime : curr.start,endtime : curr.end},
+                    params:{name: props.str ,starttime : curr.start,endtime : curr.end},
                 }).then(async (response) => {
                     resolve(response.data);
                 });
@@ -43,7 +42,7 @@ class AddData extends Component {
             return;
         }
         Axios.post("https://schedule-calender.herokuapp.com/insert",
-            {params:{name: props.name, date:curr.date, start: curr.start,
+            {params:{name: props.str, date: props.date, start: curr.start,
                 end: curr.end, task: curr.task}}
         ).then((response)=>{
             window.location.reload();
