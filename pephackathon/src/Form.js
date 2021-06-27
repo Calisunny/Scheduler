@@ -39,7 +39,7 @@ class Form extends Component {
         ).then((response)=>{
             window.location.reload();
         });
-    };
+    }
     hide = () => {
         var element = document.getElementById("Form");
         element.classList.remove("visibleForm");

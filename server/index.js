@@ -83,10 +83,6 @@ app.post("/insert", (req, res) => {
     );
 });
 app.get("/check", (req, res) => {
-    console.log(req.query.starttime);
-    console.log(req.query.endtime);
-    console.log(req.query.name);
-
     db.query(
         `SELECT COUNT(*) FROM teachers WHERE endtime > ${req.query.starttime} AND starttime < ${req.query.endtime}AND name = ${req.query.name}`,
         (err, result) => {
@@ -101,5 +97,3 @@ app.get("/check", (req, res) => {
 app.listen(process.env.PORT || PORT, () => {
     console.log("Your server is running on port 3001");
 });
-// CLEVER_TOKEN=c96ff22614534a5aa72fc167235c2120
-// CLEVER_SECRET=50f1f536b1eb48a79e98e205cf5a49d5
