@@ -34,7 +34,7 @@ class AddData extends Component {
                     params:{name: props.str ,starttime : curr.start,endtime : curr.end},
                 }).then(async (response) => {
                     resolve(response.data);
-                });
+                }).catch((err)=>console.log(err));
             })
         }
         let count = getCount();
@@ -43,7 +43,7 @@ class AddData extends Component {
             return;
         }
         Axios.post("https://schedule-calender.herokuapp.com/insert",
-            {params:{name: props.str, date: props.date, start: curr.start,
+            {params:{name: props.str, date: "2021-06-"+props.date, start: curr.start,
                 end: curr.end, task: curr.task}}
         ).then((response)=>{
             window.location.reload();

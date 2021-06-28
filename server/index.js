@@ -40,7 +40,6 @@ app.get("/data", (req, res) => {
     );
 });
 app.get("/profile", (req, res) => {
-    console.log(req.query.name);
     db.query(
         `SELECT date, starttime, endtime, task FROM teachers 
         WHERE name = '${req.query.name}' ORDER BY date , starttime `,
@@ -63,7 +62,6 @@ app.get("/end", (req, res) => {
     });
 });
 app.post("/insert", (req, res) => {
-  console.log(req);
     db.query(
         "INSERT INTO teachers (name,date,starttime,endtime,task) VALUES (?,?,?,?,?)",
         [
@@ -84,7 +82,8 @@ app.post("/insert", (req, res) => {
 });
 app.get("/check", (req, res) => {
     db.query(
-        `SELECT COUNT(*) FROM teachers WHERE endtime > ${req.query.starttime} AND starttime < ${req.query.endtime}AND name = ${req.query.name}`,
+        `SELECT COUNT(*) FROM teachers WHERE endtime > ${req.query.starttime}
+         AND starttime < ${req.query.endtime} AND name = ${req.query.name}`,
         (err, result) => {
             if (err) {
                 console.log(err);

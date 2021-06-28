@@ -41,30 +41,29 @@ class App extends Component {
                     params: { name: str },
                 }).then(async (response) => {
                     for (let i = 0; i < response.data.length; i++) {
-                        let profiledata = await getData(
-                            response.data[i].name,
-                            str
-                        );
+                        let profiledata = await getData(response.data[i].name)
                         dbdata.push(profiledata);
                     }
                     resolve(dbdata);
                 });
             });
         }
-        const getData = (useName, str) => {
+        const getData = (useName) => {
             return new Promise(async (resolve) => {
                 let profiledata = [];
                 profiledata.push(useName);
                 await Axios.get("https://schedule-calender.herokuapp.com/profile", {
-                    params: { name: useName },
+                    params: {name : useName},
                 }).then((res) => {
                     const data = res.data; 
                     for (let i = 0; i < data.length; i++) {
+                        console.log(data[i]);
                         const date = data[i].date.substring(5, 10);
                         profiledata.push(date);
                         profiledata.push(data[i].starttime.substring(0, 5)+"-"+
                         data[i].endtime.substring(0, 5));
                         profiledata.push(data[i].task);
+                        // profiledata.push(data[i]);
                     }
                     resolve(profiledata);
                 });
