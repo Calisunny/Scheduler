@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import "./DisplayTeacher.css"
+import Axios from "axios";
 
 class AddData extends Component {
     constructor(props) {
