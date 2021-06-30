@@ -57,6 +57,16 @@
     padding: 0%;
     margin-left: 2%;
 }
+.m0 {
+    margin: 0%;
+}
+.teacherContainer {
+    min-height: 200px;
+}
+.data {
+    text-transform: capitalize;
+    width: 100%;
+}
 .back {
     padding: 0%;
     margin: 4px;
@@ -64,21 +74,6 @@
     text-align: center;
     height: 20px;
     width: 30px;
-}
-.m0 {
-    margin: 0%;
-}
-.viewType {
-    font-size: 70%;
-    margin: 4px;
-}
-.teacherContainer {
-    min-height: 200px;
-}
-.data {
-    text-transform: capitalize;
-}
-.back {
     background-color: #fff;
     outline-width: 0;
     border: none;
@@ -90,6 +85,8 @@
     margin-right: 20px !important;
     border: none;
     outline-width: 0;
+    font-size: 70%;
+    margin: 4px;
 }
 .viewType option {
     border: none;
@@ -121,10 +118,43 @@
     justify-content: space-evenly;
     flex-direction: row;
 }
+.WeekParent {
+    display: flex;
+    align-items: flex-start;
+}
+.WeekDayParent {
+    flex-direction: column;
+}
+.Wday,
+.range,
+.task {
+    display: flex;
+    justify-content: center;
+}
+.Wday {
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+.Wend {
+    color: red;
+}
 @media only screen and (max-width: 495px) {
     .WeekParent {
         flex-direction: column;
         justify-content: flex-start;
+        margin: 20px;
+    }
+    .WeekDayParent {
+        flex-direction: row;
+    }
+    .Wday,
+    .range,
+    .task {
+        justify-content: space-around;
+        align-items: center;
+    }
+    .Wday {
+        margin-right: 20px;
     }
 }
 @media only screen and (min-width: 495px) {
