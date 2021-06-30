@@ -37,11 +37,14 @@ class App extends Component {
         let dbdata = [];
         function getName(str) {
             return new Promise(async (resolve) => {
-                await Axios.get("https://schedule-calender.herokuapp.com/search", {
-                    params: { name: str },
-                }).then(async (response) => {
+                await Axios.get(
+                    "https://schedule-calender.herokuapp.com/search",
+                    {
+                        params: { name: str },
+                    }
+                ).then(async (response) => {
                     for (let i = 0; i < response.data.length; i++) {
-                        let profiledata = await getData(response.data[i].name)
+                        let profiledata = await getData(response.data[i].name);
                         dbdata.push(profiledata);
                     }
                     resolve(dbdata);
@@ -52,17 +55,14 @@ class App extends Component {
             return new Promise(async (resolve) => {
                 let profiledata = [];
                 profiledata.push(useName);
-                await Axios.get("https://schedule-calender.herokuapp.com/profile", {
-                    params: {name : useName},
-                }).then((res) => {
-                    const data = res.data; 
+                await Axios.get(
+                    "https://schedule-calender.herokuapp.com/profile",
+                    {
+                        params: { name: useName },
+                    }
+                ).then((res) => {
+                    const data = res.data;
                     for (let i = 0; i < data.length; i++) {
-                        console.log(data[i]);
-                        // const date = data[i].date.substring(5, 10);
-                        // profiledata.push(date);
-                        // profiledata.push(data[i].starttime.substring(0, 5)+"-"+
-                        // data[i].endtime.substring(0, 5));
-                        // profiledata.push(data[i].task);
                         profiledata.push(data[i]);
                     }
                     resolve(profiledata);
@@ -92,7 +92,7 @@ class App extends Component {
         }
         return (
             <div>
-                <Topbar textChange={this.textChange} enter={curr.enter}/>
+                <Topbar textChange={this.textChange} enter={curr.enter} />
                 <div className="teacherParent">
                     {curr.show.map((data, index) => (
                         <div
@@ -103,17 +103,20 @@ class App extends Component {
                             <div className="bigText" key={index}>
                                 <h2 id={names[k]}>{names[k++]}</h2>
                             </div>
-                            {
-                                data.map((obj,index)=>(
-                                <div className="data" key={index} id={names[k-1]}>
-                                    <div>{obj.name}</div>
-                                    <br />
-                                    <div>{obj.starttime} - {obj.endtime}</div>
-                                    <br />
-                                    <div>{obj.task}</div>
+                            {data.map((obj, index) => (
+                                <div
+                                    className="data"
+                                    key={index}
+                                    id={names[k - 1]}
+                                >
+                                    <div className="date">{obj.date.substring(5, 10)}</div>
+                                    <div className="range">
+                                        {obj.starttime.substring(0, 5)} -
+                                        {obj.endtime.substring(0, 5)}
+                                    </div>
+                                    <div className="task">{obj.task}</div>
                                 </div>
-                                ))
-                            }
+                            ))}
                             <div className="needPading"></div>
                         </div>
                     ))}
