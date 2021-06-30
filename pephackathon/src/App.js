@@ -58,12 +58,12 @@ class App extends Component {
                     const data = res.data; 
                     for (let i = 0; i < data.length; i++) {
                         console.log(data[i]);
-                        const date = data[i].date.substring(5, 10);
-                        profiledata.push(date);
-                        profiledata.push(data[i].starttime.substring(0, 5)+"-"+
-                        data[i].endtime.substring(0, 5));
-                        profiledata.push(data[i].task);
-                        // profiledata.push(data[i]);
+                        // const date = data[i].date.substring(5, 10);
+                        // profiledata.push(date);
+                        // profiledata.push(data[i].starttime.substring(0, 5)+"-"+
+                        // data[i].endtime.substring(0, 5));
+                        // profiledata.push(data[i].task);
+                        profiledata.push(data[i]);
                     }
                     resolve(profiledata);
                 });
@@ -104,10 +104,13 @@ class App extends Component {
                                 <h2 id={names[k]}>{names[k++]}</h2>
                             </div>
                             {
-                                data.map((val,index)=>(
+                                data.map((obj,index)=>(
                                 <div className="data" key={index} id={names[k-1]}>
-                                    {val}
+                                    <div>{obj.name}</div>
                                     <br />
+                                    <div>{obj.starttime} - {obj.endtime}</div>
+                                    <br />
+                                    <div>{obj.task}</div>
                                 </div>
                                 ))
                             }
