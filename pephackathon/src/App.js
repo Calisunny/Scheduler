@@ -109,12 +109,16 @@ class App extends Component {
                                     key={index}
                                     id={names[k - 1]}
                                 >
-                                    <div className="date">{obj.date.substring(5, 10)}</div>
-                                    <div className="range">
+                                    <div className="date" id={names[k - 1]}>
+                                        {obj.date.substring(5, 10)}
+                                    </div>
+                                    <div className="range" id={names[k - 1]}>
                                         {obj.starttime.substring(0, 5)} -
                                         {obj.endtime.substring(0, 5)}
                                     </div>
-                                    <div className="task">{obj.task}</div>
+                                    <div className="task" id={names[k - 1]}>
+                                        {obj.task}
+                                    </div>
                                 </div>
                             ))}
                             <div className="needPading"></div>

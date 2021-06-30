@@ -30,7 +30,6 @@ class Day extends Component {
         let dbdata = [];
         function getName(str) {
             return new Promise(async (resolve) => {
-                console.log(date, str);
                 await Axios.get(
                     "https://schedule-calender.herokuapp.com/data",
                     {
@@ -38,7 +37,6 @@ class Day extends Component {
                     }
                 ).then(async (response) => {
                     let data = response.data;
-                    console.log(data);
                     for (let i = 0; i < data.length; i++) {
                         dbdata.push(data[i]);
                     }
@@ -53,7 +51,6 @@ class Day extends Component {
         const curr = this.state;
         return (
             <div className="dayResults">
-                <br />
                 <br />
                 {curr.show.map((obj, ind) => (
                     <div className="data" key={ind}>
