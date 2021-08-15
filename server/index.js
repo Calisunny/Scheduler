@@ -80,6 +80,27 @@ app.post("/insert", (req, res) => {
         }
     );
 });
+// delete
+app.delete("/delete", (req, res) => {
+    console.log(req.body.params.name.toLowerCase(),
+    req.body.params.date,
+    req.body.params.start);
+    db.query(
+        "DELETE From teachers WHERE name=? AND date=? AND starttime=?",
+        [
+            req.body.params.name.toLowerCase(),
+            req.body.params.date,
+            req.body.params.start,
+        ],
+        (err, result) => {
+            if (err) {
+                console.log(err);
+            } else {
+                res.send("delete Successful");
+            }
+        }
+    );
+});
 app.get("/check", (req, res) => {
     db.query(
         `SELECT COUNT(*) FROM teachers WHERE endtime > ${req.query.starttime}
